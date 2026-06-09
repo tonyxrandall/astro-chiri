@@ -1,6 +1,5 @@
 export const imageConfig = {
-  // Enhanced image optimization settings
-  limitInputPixels: 268402689, // ~16K x 16K pixels
+  limitInputPixels: 268402689,
   jpeg: {
     quality: 85,
     progressive: true,

@@ -43,7 +43,7 @@
 
 <script is:inline>
   function setupTag() {
-    let currentState = 'add' // 'add', 'input', 'display'
+    let currentState = 'add'
     let tagValue = localStorage.getItem('tagValue') || ''
 
     const addButton = document.getElementById('add-button')
@@ -69,7 +69,6 @@
       currentState = 'add'
     }
 
-    // Switch to input state
     function switchToInput() {
       currentState = 'input'
       addButton.classList.add('hidden')
@@ -79,19 +78,16 @@
       }, 100)
     }
 
-    // Switch to display state
     function switchToDisplay() {
       currentState = 'display'
       inputState.classList.remove('active')
       setTimeout(() => {
         tagDisplay.classList.add('active')
         tagText.textContent = truncateText(tagValue)
-        // Store to localStorage
         localStorage.setItem('tagValue', tagValue)
       }, 300)
     }
 
-    // Return to add state
     function switchToAdd() {
       if (currentState === 'display') {
         tagDisplay.classList.remove('active')
@@ -108,7 +104,6 @@
       }, 250)
     }
 
-    // Update confirm button state
     function updateConfirmButton() {
       if (tagInput.value.trim()) {
         confirmButton.classList.remove('disabled')
@@ -117,7 +112,6 @@
       }
     }
 
-    // Truncate text to max 24 characters
     function truncateText(text, maxLength = 24) {
       if (text.length <= maxLength) {
         return text
@@ -125,7 +119,6 @@
       return text.substring(0, maxLength) + '...'
     }
 
-    // Bind events
     addButton.onclick = switchToInput
 
     tagInput.oninput = function (e) {

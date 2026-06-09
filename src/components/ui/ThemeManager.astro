@@ -1,7 +1,3 @@
-<!--
-  This is a critical style block to prevent flashing on page load in dark mode.
-  It is injected into the <head> of the document before the main stylesheets are loaded.
--->
 <style is:inline>
   :root {
     --bg: #ffffff;
@@ -22,9 +18,7 @@
 </style>
 
 <script is:inline>
-  // Global Theme Manager
   ;(function () {
-    // Prevent duplicate initialization
     if (window.ThemeManager && window.ThemeManager.initialized) {
       return
     }
@@ -54,7 +48,6 @@
       setStoredTheme(theme) {
         try {
           if (theme === 'system') {
-            // Reserved API: clearing storage makes the current system theme effective again.
             localStorage.removeItem(this.STORAGE_KEY)
           } else {
             localStorage.setItem(this.STORAGE_KEY, theme)
@@ -79,7 +72,6 @@
 
         const isSystemTheme = this.isUsingSystemTheme()
 
-        // Dispatch event for other components
         document.dispatchEvent(
           new CustomEvent('themechange', {
             detail: {
@@ -93,7 +85,6 @@
 
       toggle() {
         const currentTheme = this.getEffectiveTheme()
-        // Simply toggle between light and dark
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
 
         this.setStoredTheme(newTheme)
@@ -103,13 +94,11 @@
       init() {
         if (this.initialized) return
 
-        // Set initial theme (maintain current theme when refreshing page)
         this.applyTheme(this.getEffectiveTheme())
 
         systemThemeQuery.addEventListener('change', (e) => {
           const newSystemTheme = e.matches ? 'dark' : 'light'
 
-          // Current product behavior: system theme changes always become the stored theme.
           this.setStoredTheme(newSystemTheme)
           this.applyTheme(newSystemTheme)
         })
@@ -118,7 +107,6 @@
       }
     }
 
-    // Initialize theme manager
     window.ThemeManager.init()
 
     const applyTheme = () => {
@@ -128,17 +116,14 @@
       }
     }
 
-    // Listen for navigation events
     document.addEventListener('astro:before-preparation', applyTheme)
 
-    // Apply theme after DOM changes (both swap and page load)
     const applyThemeAfterNavigation = () => {
       if (window.ThemeManager) {
         const currentTheme = window.ThemeManager.getEffectiveTheme()
         const appliedTheme = getAppliedTheme()
 
         if (currentTheme !== appliedTheme) {
-          // Use requestAnimationFrame to ensure theme is applied in the next frame, avoiding conflicts with view transition
           requestAnimationFrame(() => {
             window.ThemeManager.applyTheme(currentTheme)
           })

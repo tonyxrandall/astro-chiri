@@ -14,17 +14,8 @@ const markdownParser = new MarkdownIt({
   typographer: true
 })
 
-const imagesGlob = import.meta.glob<{ default: ImageMetadata }>(
-  '/src/content/posts/_assets/**/*.{jpeg,jpg,png,gif,webp}'
-)
+const imagesGlob = import.meta.glob<{ default: ImageMetadata }>('/src/content/posts/_assets*.{jpeg,jpg,png,gif,webp}')
 
-/**
- * Fix relative image paths in HTML content and convert them to absolute URLs
- * @param htmlContent - HTML string converted from Markdown
- * @param baseUrl - Base URL of the website
- * @param postPath - Current post path (e.g., 'some-post.md' or 'tech/another-post.md')
- * @returns - HTML string with processed image paths
- */
 async function fixRelativeImagePaths(htmlContent: string, baseUrl: string, postPath: string): Promise<string> {
   const root = htmlParser(htmlContent)
   const imageTags = root.querySelectorAll('img')
@@ -39,42 +30,33 @@ async function fixRelativeImagePaths(htmlContent: string, baseUrl: string, postP
     }
 
     if (src.startsWith('./') || src.startsWith('../')) {
-      // Build path relative to /src/content/posts
       let resolvedPath: string
       if (src.startsWith('./')) {
-        // ./xxx -> postDir/xxx
         resolvedPath = path.posix.join('/src/content/posts', postDir, src.slice(2))
       } else {
-        // ../xxx -> Resolve to parent directory
         resolvedPath = path.posix.resolve('/src/content/posts', postDir, src)
       }
 
-      // Check if corresponding image module exists
       if (imagesGlob[resolvedPath]) {
         try {
           const imageModule = await imagesGlob[resolvedPath]()
           const metadata = imageModule.default
 
-          // In development environment, don't process images, use original paths to ensure cross-platform compatibility
           if (import.meta.env.DEV) {
-            // Development environment: use relative paths
             const relativePath = resolvedPath.replace('/src/content/posts/', '/')
             const imageUrl = new URL(relativePath, baseUrl).toString()
             img.setAttribute('src', imageUrl)
           } else {
-            // Production environment: use getImage optimization
             const processedImage = await getImage({
               src: metadata,
               format: 'webp',
               width: 800
             })
 
-            // Always use the optimized image path in production
             img.setAttribute('src', new URL(processedImage.src, baseUrl).toString())
           }
         } catch (error) {
           console.error(`[Feed] Image processing failed: ${src} -> ${resolvedPath}`, error)
-          // Use original path as fallback when error occurs
           const relativePath = resolvedPath.replace('/src/content/posts/', '/')
           const imageUrl = new URL(relativePath, baseUrl).toString()
           img.setAttribute('src', imageUrl)
@@ -91,9 +73,6 @@ async function fixRelativeImagePaths(htmlContent: string, baseUrl: string, postP
   return root.toString()
 }
 
-/**
- * Generate a generic Feed instance
- */
 async function generateFeedInstance(context: APIContext) {
   const siteUrl = (context.site?.toString() || themeConfig.site.website).replace(/\/$/, '')
   const { title = '', description = '', author = '', language = 'en-US' } = themeConfig.site
@@ -117,7 +96,10 @@ async function generateFeedInstance(context: APIContext) {
     }
   })
 
-  const posts = await getCollection('posts', ({ id, data }: CollectionEntry<'posts'>) => !id.startsWith('_') && !data.draft)
+  const posts = await getCollection(
+    'posts',
+    ({ id, data }: CollectionEntry<'posts'>) => !id.startsWith('_') && !data.draft
+  )
   const sortedPosts = posts.sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
   )
@@ -137,7 +119,6 @@ async function generateFeedInstance(context: APIContext) {
       }
     })
 
-    // Generate plain text summary for description
     const plainText = sanitizeHtml(cleanHtml, { allowedTags: [], allowedAttributes: {} }).replace(/\s+/g, ' ').trim()
     const description = plainText.length > 200 ? plainText.slice(0, 200) + '...' : plainText
 
@@ -155,9 +136,6 @@ async function generateFeedInstance(context: APIContext) {
   return feed
 }
 
-/**
- * Generate RSS 2.0 feed
- */
 export async function generateRSS(context: APIContext) {
   const feed = await generateFeedInstance(context)
   const rssXml = feed
@@ -171,9 +149,6 @@ export async function generateRSS(context: APIContext) {
   })
 }
 
-/**
- * Generate Atom 1.0 feed
- */
 export async function generateAtom(context: APIContext) {
   const feed = await generateFeedInstance(context)
   const atomXml = feed

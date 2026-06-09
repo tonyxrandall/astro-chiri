@@ -56,11 +56,9 @@ import { themeConfig } from '@/config'
     const copyButtons = document.querySelectorAll('.copy-button')
 
     copyButtons.forEach((button) => {
-      // Avoid initializing multiple times (important for SPA navigation)
       if (button.dataset.copyInit) return
       button.dataset.copyInit = '1'
 
-      // Find the closest pre element with the .copy-code-block class
       let preElement = button.closest('.copy-code-block')
       if (!preElement) {
         const parent = button.parentElement
@@ -93,17 +91,14 @@ import { themeConfig } from '@/config'
     })
   }
 
-  // Use only astro:page-load as it fires on initial load and navigation
   document.addEventListener('astro:page-load', initCopyCode)
 </script>
 
 <style is:inline>
-  /* Ensure the positioned ancestor is correct */
   .copy-code-wrapper {
     position: relative !important;
   }
 
-  /* Keep for backward compatibility */
   .copy-code-block {
     position: relative !important;
   }

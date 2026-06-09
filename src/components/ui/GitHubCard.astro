@@ -10,7 +10,6 @@
 
   const githubCacheTtl = 60 * 60 * 1000
 
-  // Update the GitHub card UI elements with fetched repository data
   function updateCardUI(el: CardElements, data: GitHubRepoData) {
     const numberFormat = new Intl.NumberFormat('en', {
       notation: 'compact',
@@ -38,7 +37,6 @@
     }
   }
 
-  // Load GitHub repository data for a card, using cache if available or fetching from API
   async function loadCardData(card: HTMLElement) {
     const repo = card.dataset.repo
 

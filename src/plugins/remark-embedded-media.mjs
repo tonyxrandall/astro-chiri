@@ -164,12 +164,7 @@ function renderLinkIcon() {
   </svg>`
 }
 
-/**
- * A remark plugin that converts custom directives to embedded media HTML elements
- * Supports: link cards, Spotify, YouTube, Bilibili, X posts, and GitHub repository cards
- */
 const embedHandlers = {
-  // Link Card
   link: (node) => {
     const rawUrl = node.attributes?.url ?? ''
     const parsedUrl = normalizeHttpUrl(rawUrl)
@@ -214,7 +209,6 @@ const embedHandlers = {
     `
   },
 
-  // Spotify
   spotify: (node) => {
     const url = node.attributes?.url ?? ''
     const embedUrl = getSpotifyEmbedUrl(url)
@@ -243,7 +237,6 @@ const embedHandlers = {
     `
   },
 
-  // Youtube
   youtube: (node) => {
     const videoId = getYouTubeVideoId(node.attributes?.id ?? '', node.attributes?.url ?? '')
 
@@ -266,7 +259,6 @@ const embedHandlers = {
     `
   },
 
-  // Bilibili
   bilibili: (node) => {
     const bvid = getBilibiliVideoId(node.attributes?.id ?? '', node.attributes?.url ?? '')
 
@@ -291,7 +283,6 @@ const embedHandlers = {
     `
   },
 
-  // X Post Card
   x: (node) => {
     const twitterUrl = getXPostUrl(node.attributes?.url ?? '')
     if (!twitterUrl) {
@@ -309,7 +300,6 @@ const embedHandlers = {
     `
   },
 
-  // Github Repository Card
   github: (node) => {
     const repoData = getGitHubRepo(node.attributes?.repo ?? '')
     if (!repoData) {
@@ -349,7 +339,6 @@ const embedHandlers = {
     `
   },
 
-  // NeoDB Card
   neodb: (node) => {
     const parsedUrl = normalizeHttpUrl(node.attributes?.url ?? '')
     if (!parsedUrl || getHostName(parsedUrl) !== 'neodb.social') {

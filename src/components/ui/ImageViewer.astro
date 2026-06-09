@@ -25,7 +25,6 @@
 
     if (!viewer || !viewerImg || viewerImg.tagName !== 'IMG' || !contentArea) return
 
-    // Display image in fullscreen viewer overlay
     function showImage(src: string, alt?: string) {
       if (viewerImg && src) {
         viewerImg.src = src
@@ -39,7 +38,6 @@
       document.body.dataset.scrollY = window.scrollY.toString()
     }
 
-    // Hide the image viewer and restore page scroll
     function hideImage() {
       viewer!.classList.remove('active')
       document.body.classList.remove('image-viewer-open')
@@ -76,13 +74,11 @@
       }
     }
 
-    // Hide and clear image after transition ends
     viewer.addEventListener('transitionend', handleViewerTransitionEnd)
 
     viewer.addEventListener('click', hideImage)
     contentArea.addEventListener('click', handleContentClick)
 
-    // Prevent touch scroll in image viewer
     viewer.addEventListener('touchmove', handleViewerTouchMove, { passive: false })
 
     document.addEventListener('keydown', handleKeydown)
@@ -109,7 +105,6 @@
     window.__imageViewerController = controller
   }
 
-  // Use only astro:page-load as it fires on initial load and navigation
   document.addEventListener('astro:page-load', initImageViewer)
 </script>
 

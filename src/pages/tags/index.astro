@@ -12,7 +12,13 @@ const tags = [...new Set(posts.flatMap((post) => normalizeTags(post.data.tags)))
   <main class="prose">
     <h1>Tags</h1>
     <ul>
-      {tags.map((tag) => <li><a href={`/tags/${tag}/`}>{tag}</a></li>)}
+      {
+        tags.map((tag) => (
+          <li>
+            <a href={`/tags/${tag}/`}>{tag}</a>
+          </li>
+        ))
+      }
     </ul>
   </main>
 </IndexLayout>

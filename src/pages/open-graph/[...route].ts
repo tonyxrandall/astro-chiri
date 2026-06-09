@@ -9,9 +9,6 @@ const collectionEntries = await getCollection(
   ({ id, data }: CollectionEntry<'posts'>) => !id.startsWith('_') && !data.draft
 )
 
-// Map the array of content collection entries to create an object.
-// Converts [{ id: 'post.md', data: { title: 'Example', pubDate: Date } }]
-// to { 'post.md': { title: 'Example', pubDate: Date } }
 const pages = Object.fromEntries(
   collectionEntries.map((entry: CollectionEntry<'posts'>) => [entry.id.replace(/\.(md|mdx)$/, ''), entry.data])
 )

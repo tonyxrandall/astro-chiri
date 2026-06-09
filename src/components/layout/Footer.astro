@@ -15,11 +15,15 @@ const links = footer?.data.links ?? []
       <div class="copyright">{copyright ?? companyName}</div>
       {tagline && <div class="tagline">{tagline}</div>}
     </div>
-    {links.length > 0 && (
-      <nav aria-label="Footer">
-        {links.map((link) => <a href={link.url}>{link.label}</a>)}
-      </nav>
-    )}
+    {
+      links.length > 0 && (
+        <nav aria-label="Footer">
+          {links.map((link) => (
+            <a href={link.url}>{link.label}</a>
+          ))}
+        </nav>
+      )
+    }
   </div>
 </footer>
 <style>

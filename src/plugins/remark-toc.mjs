@@ -6,14 +6,11 @@ export default function remarkTOC() {
     let headingIndex = 0
     const usedSlugs = new Set()
 
-    // Extract headings from AST
     visit(tree, 'heading', (node) => {
       const level = node.depth
 
-      // Only process h1, h2, h3
       if (level > 3) return
 
-      // Skip the first h1
       if (level === 1 && headingIndex === 0) {
         headingIndex++
         return
@@ -22,7 +19,6 @@ export default function remarkTOC() {
       const text = extractTextContent(node)
       if (!text) return
 
-      // Generate unique slug from text
       const slug = generateUniqueSlug(text, usedSlugs)
       const id = slug
 
@@ -40,7 +36,6 @@ export default function remarkTOC() {
       headingIndex++
     })
 
-    // Store TOC data in file.data.astro.frontmatter
     if (!file.data.astro) file.data.astro = {}
     if (!file.data.astro.frontmatter) file.data.astro.frontmatter = {}
     file.data.astro.frontmatter.toc = headings
@@ -57,23 +52,15 @@ function extractTextContent(node) {
   return text.trim()
 }
 
-// Generate a slug from text
 function generateSlug(text) {
-  return (
-    text
-      .toLowerCase()
-      // Keep Chinese characters, English letters, numbers, spaces and hyphens
-      .replace(/[^\u4e00-\u9fa5a-z0-9\s-]/g, '')
-      // Replace spaces with hyphens
-      .replace(/\s+/g, '-')
-      // Replace multiple hyphens with single hyphen
-      .replace(/-+/g, '-')
-      // Remove leading and trailing hyphens
-      .replace(/^-|-$/g, '')
-  )
+  return text
+    .toLowerCase()
+    .replace(/[^\u4e00-\u9fa5a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
 }
 
-// Generate a unique slug from text
 function generateUniqueSlug(text, usedSlugs) {
   let slug = generateSlug(text)
   let counter = 1

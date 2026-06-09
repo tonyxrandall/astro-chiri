@@ -8,12 +8,9 @@ const { toc = [] }: TOCProps = Astro.props
 <div class="toc-container" id="toc">
   <nav class="toc-nav">
     <ul class="toc-list" id="toc-list">
-      <!-- Back to top link -->
       <li class="toc-item toc-level-0">
         <a href="#" class="toc-link toc-title" title="Back to top" data-text="Back to top"> Back to top </a>
       </li>
-
-      <!-- TOC items -->
       {
         toc.map((item) => (
           <li class={`toc-item toc-level-${item.level}`}>
@@ -43,7 +40,6 @@ const { toc = [] }: TOCProps = Astro.props
     const activeOffset = 128
     const jumpOffset = 96
 
-    // Core state
     const state = {
       container: null,
       linkList: [],
@@ -58,7 +54,6 @@ const { toc = [] }: TOCProps = Astro.props
       hasContent: false
     }
 
-    // Initialize DOM elements
     function initElements() {
       state.container = document.querySelector('.toc-container')
       if (!state.container) return false
@@ -69,7 +64,6 @@ const { toc = [] }: TOCProps = Astro.props
       )
       state.titleLink = document.querySelector('.toc-link.toc-title')
 
-      // Build heading map
       state.headingMap.clear()
       state.linkList.forEach((link) => {
         const href = link.getAttribute('href')
@@ -81,7 +75,6 @@ const { toc = [] }: TOCProps = Astro.props
       return true
     }
 
-    // Check if content exists
     function checkContent() {
       if (!state.container) return
 
@@ -93,7 +86,6 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Adjust TOC position
     function adjustPosition() {
       if (!state.container || !centeredLayout || !state.hasContent) {
         if (state.container) state.container.style.display = 'none'
@@ -103,7 +95,7 @@ const { toc = [] }: TOCProps = Astro.props
       const pageWidth = window.innerWidth
       const contentWidthValue = Math.max(parseFloat(contentWidth), 25)
       const margin = (pageWidth - contentWidthValue * 16) / 2
-      const baseMinSpace = 11 * 16 // Base minimum space needed
+      const baseMinSpace = 11 * 16
       const minSpace = toc ? baseMinSpace + 52 : baseMinSpace + 12
 
       if (margin >= minSpace) {
@@ -118,7 +110,6 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Handle click events
     function handleClick(e) {
       const link = e.target.closest('.toc-link')
       if (!link) return
@@ -193,7 +184,6 @@ const { toc = [] }: TOCProps = Astro.props
       })
     }
 
-    // Initialize
     function init(retryCount = 0) {
       const maxRetries = 5
 
@@ -211,7 +201,6 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Event handlers
     function handleResize() {
       if (state.resizeTimeout) {
         cancelAnimationFrame(state.resizeTimeout)
@@ -223,7 +212,6 @@ const { toc = [] }: TOCProps = Astro.props
       })
     }
 
-    // Reset DOM-scoped work; destroy() additionally removes global listeners.
     function cleanup() {
       if (state.activeLink) {
         state.activeLink.classList.remove('active')
@@ -287,7 +275,6 @@ const { toc = [] }: TOCProps = Astro.props
       }
     }
 
-    // Event listeners
     document.addEventListener('astro:page-load', scheduleReset)
     document.addEventListener('astro:after-swap', scheduleReset)
     window.addEventListener('scroll', scheduleActiveRefresh, { passive: true })
@@ -408,7 +395,6 @@ const { toc = [] }: TOCProps = Astro.props
     color: var(--text-primary);
   }
 
-  /* Horizontal line indicators */
   .toc-level-0 .toc-link::before,
   .toc-level-1 .toc-link::before,
   .toc-level-2 .toc-link::before,
@@ -431,7 +417,6 @@ const { toc = [] }: TOCProps = Astro.props
     background-color: var(--text-primary);
   }
 
-  /* Hide on mobile */
   @media (max-width: 768px) {
     .toc-container {
       display: none !important;

@@ -1,4 +1,4 @@
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+<button id="theme-toggle" class="theme-toggle" aria-label="Invert colors" title="Invert colors">
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <g>
       <rect width="12" height="12" fill="none"></rect>
@@ -14,7 +14,6 @@
     const themeToggle = document.getElementById('theme-toggle')
     if (!themeToggle || !window.ThemeManager) return
 
-    // Skip if already bound
     if (themeToggle.dataset.themeBound) return
     themeToggle.dataset.themeBound = 'true'
 
@@ -25,7 +24,6 @@
     })
   }
 
-  // Use only astro:page-load as it fires on initial load and navigation
   document.addEventListener('astro:page-load', bindThemeToggle)
 </script>
 
