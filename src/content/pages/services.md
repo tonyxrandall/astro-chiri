@@ -2,7 +2,7 @@
 title: Services — The B-Side
 description: Linkbuilding services for competitive brands, local SEO, rehabs, agencies, and teams that need relevance-first off-site SEO.
 hero:
-  heading: Process:
+  heading: Process
   subtext: 
 featureSplits:
   - heading: Analysis
