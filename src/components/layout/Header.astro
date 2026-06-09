@@ -12,7 +12,10 @@ const ctaUrl = navigation?.data.ctaUrl
 
 <header>
   <nav>
-    <a class="site-name" href="/">{siteName}</a>
+    <a class="site-name" href="/" aria-label={siteName}>
+      <img src="/images/b-side-logo.png" alt="" width="28" height="28" />
+      <span>{siteName}</span>
+    </a>
     <div class="nav-links">
       {navLinks.map((link) => <a href={link.url}>{link.label}</a>)}
       {ctaText && ctaUrl && <a href={ctaUrl}>{ctaText}</a>}
@@ -38,9 +41,18 @@ const ctaUrl = navigation?.data.ctaUrl
   }
 
   .site-name {
-    display: inline-block;
+    align-items: center;
+    display: inline-flex;
     font-weight: var(--font-weight-bold);
+    gap: 0.5rem;
     min-width: 3rem;
+  }
+
+  .site-name img {
+    border-radius: 0.35rem;
+    display: block;
+    height: 1.75rem;
+    width: 1.75rem;
   }
 
   .nav-links {

@@ -9,34 +9,38 @@ const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
 ---
 
 <div class="about-page prose">
-  {hero && (
-    <section class="about-hero">
-      {hero.eyebrow && <p class="eyebrow">{hero.eyebrow}</p>}
-      <h1>{hero.heading}</h1>
-      {hero.image && <img src={hero.image} alt={hero.imageAlt ?? hero.heading} />}
-      {hero.body && <div set:html={renderMarkdown(hero.body)} />}
-    </section>
-  )}
+  {
+    hero && (
+      <section class="about-hero">
+        {hero.eyebrow && <p class="eyebrow">{hero.eyebrow}</p>}
+        <h1>{hero.heading}</h1>
+        {hero.body && <div set:html={renderMarkdown(hero.body)} />}
+        {hero.image && <img src={hero.image} alt={hero.imageAlt ?? hero.heading} />}
+      </section>
+    )
+  }
 
-  {contact && (
-    <section id="contact" class="contact-section">
-      <h2>{contact.heading}</h2>
-      <p>{contact.subtext}</p>
-      <form name="contact" method="POST" action="https://api.web3forms.com/submit">
-        <input type="hidden" name="access_key" value={web3formsAccessKey} />
-        <input type="hidden" name="subject" value="New contact form submission from The B-Side" />
-        <input type="hidden" name="from_name" value="The B-Side Contact Form" />
-        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required placeholder="Your name" />
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" required placeholder="your@email.com" />
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project..."></textarea>
-        <button type="submit">Send message</button>
-      </form>
-    </section>
-  )}
+  {
+    contact && (
+      <section id="contact" class="contact-section">
+        <h2>{contact.heading}</h2>
+        <p>{contact.subtext}</p>
+        <form name="contact" method="POST" action="https://api.web3forms.com/submit">
+          <input type="hidden" name="access_key" value={web3formsAccessKey} />
+          <input type="hidden" name="subject" value="New contact form submission from The B-Side" />
+          <input type="hidden" name="from_name" value="The B-Side Contact Form" />
+          <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required placeholder="Your name" />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="your@email.com" />
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project..." />
+          <button type="submit">Send message</button>
+        </form>
+      </section>
+    )
+  }
 </div>
 
 <style>
