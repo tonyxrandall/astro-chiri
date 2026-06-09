@@ -1,0 +1,117 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { renderMarkdown } from '@/utils/markdown'
+
+type Page = CollectionEntry<'pages'>
+const { page } = Astro.props as { page: Page }
+const { hero, featureSplits = [], services, cta } = page.data
+---
+
+<div class="services-page prose">
+  {
+    hero && (
+      <section class="services-hero">
+        {hero.eyebrow && <p class="eyebrow">{hero.eyebrow}</p>}
+        <h1>{hero.heading}</h1>
+        {hero.subtext && <p>{hero.subtext}</p>}
+      </section>
+    )
+  }
+
+  {
+    featureSplits.length > 0 && (
+      <section class="section-list" aria-label="Linkbuilding process">
+        {featureSplits.map((feature) => (
+          <article class="service-section">
+            {feature.eyebrow && <p class="eyebrow">{feature.eyebrow}</p>}
+            <h2>{feature.heading}</h2>
+            <p>{feature.subtext}</p>
+          </article>
+        ))}
+      </section>
+    )
+  }
+
+  {
+    services && (
+      <section class="section-list" aria-labelledby="services-heading">
+        {services.eyebrow && <p class="eyebrow">{services.eyebrow}</p>}
+        <h2 id="services-heading">{services.heading}</h2>
+        {services.subtext.trim() && <p>{services.subtext}</p>}
+        <div class="section-list service-list">
+          {services.items.map((item) => (
+            <article class="service-section">
+              <h3>{item.title}</h3>
+              <div set:html={renderMarkdown(item.description)} />
+            </article>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    cta && (
+      <section class="service-section cta-section">
+        <h2>{cta.heading}</h2>
+        <p>{cta.subtext}</p>
+        {(cta.primaryButtonText || cta.secondaryButtonText) && (
+          <div class="actions">
+            {cta.primaryButtonText && cta.primaryButtonLink && (
+              <a href={cta.primaryButtonLink}>{cta.primaryButtonText}</a>
+            )}
+            {cta.secondaryButtonText && cta.secondaryButtonLink && (
+              <a href={cta.secondaryButtonLink}>{cta.secondaryButtonText}</a>
+            )}
+          </div>
+        )}
+      </section>
+    )
+  }
+</div>
+
+<style>
+  .services-page {
+    margin-bottom: 2rem;
+  }
+
+  .services-hero {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    color: var(--text-secondary);
+    font-size: var(--font-size-s);
+    margin-bottom: 0.25rem;
+  }
+
+  .section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .service-list {
+    margin: 2rem 0 0;
+  }
+
+  .service-section > :first-child {
+    margin-top: 0;
+  }
+
+  .service-section > :last-child {
+    margin-bottom: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .actions a {
+    color: var(--text-primary);
+  }
+</style>

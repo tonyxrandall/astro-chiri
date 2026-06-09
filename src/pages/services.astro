@@ -1,0 +1,14 @@
+---
+import { getEntry } from 'astro:content'
+import IndexLayout from '@/layouts/IndexLayout.astro'
+import ServicesPageContent from '@/components/widgets/ServicesPageContent.astro'
+import { themeConfig } from '@/config'
+
+const servicesPage = await getEntry('pages', 'services')
+const title = servicesPage?.data.title ?? `Services — ${themeConfig.site.title}`
+const description = servicesPage?.data.description ?? themeConfig.site.description
+---
+
+<IndexLayout title={title} description={description}>
+  {servicesPage && <ServicesPageContent page={servicesPage} />}
+</IndexLayout>
