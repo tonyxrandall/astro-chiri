@@ -1,9 +1,6 @@
 import { toString } from 'mdast-util-to-string'
 import getReadingTime from 'reading-time'
 
-/**
- * Remark plugin to calculate and add reading time information to markdown frontmatter
- */
 export default function remarkReadingTime() {
   return function (tree, file) {
     const textOnPage = toString(tree)

@@ -14,7 +14,6 @@
     const themeToggle = document.getElementById('theme-toggle')
     if (!themeToggle || !window.ThemeManager) return
 
-    // Skip if already bound
     if (themeToggle.dataset.themeBound) return
     themeToggle.dataset.themeBound = 'true'
 
@@ -25,7 +24,6 @@
     })
   }
 
-  // Use only astro:page-load as it fires on initial load and navigation
   document.addEventListener('astro:page-load', bindThemeToggle)
 </script>
 

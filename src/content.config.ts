@@ -19,11 +19,13 @@ const parseListString = (value: string) => {
   const trimmed = value.trim()
   if (!trimmed) return []
 
+  let parsed: unknown
   try {
-    return JSON.parse(trimmed)
+    parsed = JSON.parse(trimmed)
   } catch {
-    // Pages CMS can save nested list fields as YAML-formatted strings.
+    parsed = undefined
   }
+  if (parsed !== undefined) return parsed
 
   const items: Record<string, unknown>[] = []
   let current: Record<string, unknown> | undefined
@@ -76,7 +78,11 @@ const posts = defineCollection({
       draft: z.boolean().default(false),
       tags: z.preprocess((value) => {
         if (value == null) return []
-        if (typeof value === 'string') return value.split(',').map((tag) => tag.trim()).filter(Boolean)
+        if (typeof value === 'string')
+          return value
+            .split(',')
+            .map((tag) => tag.trim())
+            .filter(Boolean)
         if (Array.isArray(value)) {
           return value
             .map((item) => (typeof item === 'string' ? item : item?.tag))
@@ -117,41 +123,51 @@ const pages = defineCollection({
     siteTagline: z.string().optional(),
     title: z.string().optional(),
     description: z.string().optional(),
-    hero: z.object({
-      heading: z.string(),
-      subtext: z.string().optional(),
-      body: z.string().optional(),
-      eyebrow: z.string().optional(),
-      primaryButtonText: z.string().optional(),
-      primaryButtonLink: z.string().optional(),
-      secondaryButtonText: z.string().optional(),
-      secondaryButtonLink: z.string().optional(),
-      image: z.string().optional(),
-      imageAlt: z.string().optional()
-    }).optional(),
+    hero: z
+      .object({
+        heading: z.string(),
+        subtext: z.string().optional(),
+        body: z.string().optional(),
+        eyebrow: z.string().optional(),
+        primaryButtonText: z.string().optional(),
+        primaryButtonLink: z.string().optional(),
+        secondaryButtonText: z.string().optional(),
+        secondaryButtonLink: z.string().optional(),
+        image: z.string().optional(),
+        imageAlt: z.string().optional()
+      })
+      .optional(),
     featureSplits: listField(featureSplitSchema).optional(),
-    services: z.object({
-      eyebrow: z.string().optional(),
-      heading: z.string(),
-      subtext: z.string(),
-      items: listField(serviceItemSchema)
-    }).optional(),
-    cta: z.object({
-      heading: z.string(),
-      subtext: z.string(),
-      primaryButtonText: z.string().optional(),
-      primaryButtonLink: z.string().optional(),
-      secondaryButtonText: z.string().optional(),
-      secondaryButtonLink: z.string().optional()
-    }).optional(),
-    ethos: z.object({
-      heading: z.string(),
-      body: z.string()
-    }).optional(),
-    contact: z.object({
-      heading: z.string(),
-      subtext: z.string()
-    }).optional()
+    services: z
+      .object({
+        eyebrow: z.string().optional(),
+        heading: z.string(),
+        subtext: z.string(),
+        items: listField(serviceItemSchema)
+      })
+      .optional(),
+    cta: z
+      .object({
+        heading: z.string(),
+        subtext: z.string(),
+        primaryButtonText: z.string().optional(),
+        primaryButtonLink: z.string().optional(),
+        secondaryButtonText: z.string().optional(),
+        secondaryButtonLink: z.string().optional()
+      })
+      .optional(),
+    ethos: z
+      .object({
+        heading: z.string(),
+        body: z.string()
+      })
+      .optional(),
+    contact: z
+      .object({
+        heading: z.string(),
+        subtext: z.string()
+      })
+      .optional()
   })
 })
 

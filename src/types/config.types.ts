@@ -1,7 +1,5 @@
-// Date format types
 export type DateFormat = 'YYYY-MM-DD' | 'MM-DD-YYYY' | 'DD-MM-YYYY' | 'MONTH DAY YYYY' | 'DAY MONTH YYYY'
 
-// Site info configuration type
 export interface SiteInfo {
   website: string
   title: string
@@ -10,7 +8,6 @@ export interface SiteInfo {
   language: string
 }
 
-// General settings configuration type
 export interface GeneralSettings {
   contentWidth: string
   centeredLayout: boolean
@@ -20,14 +17,12 @@ export interface GeneralSettings {
   fadeAnimation: boolean
 }
 
-// Date settings configuration type
 export interface DateSettings {
   dateFormat: DateFormat
   dateSeparator: string
   dateOnRight: boolean
 }
 
-// Post settings configuration type
 export interface PostSettings {
   readingTime: boolean
   toc: boolean
@@ -37,7 +32,6 @@ export interface PostSettings {
   linkCard: boolean
 }
 
-// Theme configuration type
 export interface ThemeConfig {
   site: SiteInfo
   general: GeneralSettings

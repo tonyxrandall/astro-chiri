@@ -24,13 +24,10 @@ async function clearAstroCache() {
 }
 
 if (!themeConfig.post.linkCard) {
-  let hadMetadata = false
-  try {
-    await fs.access(metadataPath)
-    hadMetadata = true
-  } catch {
-    // metadata file absent — nothing to clean up
-  }
+  const hadMetadata = await fs
+    .access(metadataPath)
+    .then(() => true)
+    .catch(() => false)
 
   if (hadMetadata) {
     await fs.rm(metadataPath, { force: true })

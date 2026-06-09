@@ -33,9 +33,9 @@
   .prose .link-card-image {
     width: 100%;
     aspect-ratio: 16 / 9;
-    /* Fallback for browsers that don't support aspect-ratio */
+
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+    padding-bottom: 56.25%;
     overflow: hidden;
     background: var(--astro-code-background);
     position: relative;
@@ -44,7 +44,6 @@
     border-radius: 6px;
   }
 
-  /* Modern browsers with aspect-ratio support */
   @supports (aspect-ratio: 16 / 9) {
     .prose .link-card-image {
       height: auto;
@@ -94,7 +93,6 @@
     order: 2;
   }
 
-  /* Modern browsers with line-clamp support */
   @supports (-webkit-line-clamp: 2) {
     .prose .link-card .link-card-description {
       max-height: none;

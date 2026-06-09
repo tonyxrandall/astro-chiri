@@ -5,7 +5,9 @@ import AboutPageContent from '@/components/widgets/AboutPageContent.astro'
 import { themeConfig } from '@/config'
 
 const aboutPage = await getEntry('pages', 'about')
-const title = aboutPage?.data.title ? `${aboutPage.data.title} — ${themeConfig.site.title}` : `About — ${themeConfig.site.title}`
+const title = aboutPage?.data.title
+  ? `${aboutPage.data.title} — ${themeConfig.site.title}`
+  : `About — ${themeConfig.site.title}`
 const description = aboutPage?.data.description ?? themeConfig.site.description
 ---
 

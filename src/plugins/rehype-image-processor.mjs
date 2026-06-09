@@ -12,13 +12,6 @@ function toClassList(value) {
   return []
 }
 
-/**
- * Rehype plugin that processes images in markdown content:
- * - Wraps images with alt text in figure/figcaption elements
- * - Adds data-preview attribute for image viewer functionality
- * - Adds lazy loading for better performance
- * - Handles multiple images in a single paragraph
- */
 export default function rehypeImageProcessor() {
   return (tree) => {
     let hasPriorityImage = false
@@ -33,15 +26,11 @@ export default function rehypeImageProcessor() {
 
       hasPriorityImage = true
 
-      // Enhanced image properties with performance optimizations
       node.properties = {
         ...node.properties,
         'data-preview': 'true',
-        // Add lazy loading for better performance
         loading: 'lazy',
-        // Add decoding hint for better performance
         decoding: 'async',
-        // Add fetchpriority for critical images (first content image gets high priority)
         ...(shouldPrioritizeImage ? { fetchpriority: 'high' } : {}),
         className: existingClasses.includes('img-placeholder')
           ? existingClasses

@@ -12,7 +12,6 @@
       element.setAttribute('data-theme', isDark ? 'dark' : 'light')
     })
 
-    // Defer loading of Twitter script to avoid blocking main thread
     const loadTwitterScript = () => {
       const script = document.createElement('script')
       script.src = 'https://platform.twitter.com/widgets.js'
@@ -20,7 +19,6 @@
       document.head.appendChild(script)
     }
 
-    // Use requestIdleCallback if available, otherwise use setTimeout
     if ('requestIdleCallback' in window) {
       requestIdleCallback(loadTwitterScript, { timeout: 2000 })
     } else {
@@ -28,7 +26,6 @@
     }
   }
 
-  // Use only astro:page-load as it fires on initial load and navigation
   document.addEventListener('astro:page-load', loadXCards)
 </script>
 

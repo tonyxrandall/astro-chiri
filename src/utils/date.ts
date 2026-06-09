@@ -5,11 +5,6 @@ const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'
 
 const VALID_SEPARATORS = ['.', '-', '/']
 
-/**
- * @param date
- * @param format
- * @returns
- */
 export function formatDate(date: Date, format?: string): string {
   const formatStr = (format || themeConfig.date.dateFormat).trim()
   const configSeparator = themeConfig.date.dateSeparator || '-'

@@ -1,6 +1,5 @@
 import type { CollectionEntry } from 'astro:content'
 
-// Reading time interface
 export interface ReadingTime {
   text: string
   minutes: number
@@ -8,7 +7,6 @@ export interface ReadingTime {
   words: number
 }
 
-// TOC item interface
 export interface TOCItem {
   level: number
   text: string
@@ -26,7 +24,6 @@ export interface ContentFeatures {
   hasXPost?: boolean
 }
 
-// PostList component props interface
 export interface PostListProps {
   posts: CollectionEntry<'posts'>[]
 }

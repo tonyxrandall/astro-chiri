@@ -11,7 +11,6 @@ const { class: className = '' } = Astro.props
 </div>
 
 <script is:inline>
-  // Cleanup hover states after Astro page load and on touch events
   function cleanupHover() {
     const hoveredLinks = document.querySelectorAll('ul a:hover')
     hoveredLinks.forEach((link) => {
@@ -23,7 +22,6 @@ const { class: className = '' } = Astro.props
     setTimeout(cleanupHover, 50)
   })
 
-  // Add touch event listener for touch devices
   document.addEventListener('touchstart', cleanupHover, { passive: true })
 </script>
 
