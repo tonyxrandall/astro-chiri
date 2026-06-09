@@ -15,8 +15,8 @@ featureSplits:
     subtext: Reporting shouldn’t mean waiting weeks to understand what’s happening with your campaign. I share my work with you throughout the process, giving you real-time visibility into outreach, communication and acquired links so you always know what's in the pipeline.
 services:
   eyebrow: Services
-  heading: ' '
-  subtext: ' '
+  heading: 
+  subtext: 
   items:
     - title: Linkbuilding
       description: 15+ years of relevance-first linkbuilding focused on earning the links my clients deserve. I believe in treating linkbuilding the same as any other optimization task, not just a service tacked on at the end to try to game the algorithms.
