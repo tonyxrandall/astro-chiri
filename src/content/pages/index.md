@@ -8,7 +8,7 @@ hero:
   primaryButtonLink: /services
   secondaryButtonText: Let's chat.
   secondaryButtonLink: /about#contact
-#cta:
+cta:
   heading: Ready to improve your link profile?
   subtext: I build links that move rankings and drive growth. Let's talk about
     what that looks like for your site.
