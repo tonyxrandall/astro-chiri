@@ -63,13 +63,6 @@ const getServiceIconPaths = (icon?: string) =>
         <div class="card-grid service-list">
           {services.items.map((item) => (
             <article class="service-card">
-              <span class="service-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img">
-                  {getServiceIconPaths(item.icon).map((path) => (
-                    <path d={path} />
-                  ))}
-                </svg>
-              </span>
               <h3>{item.title}</h3>
               <div set:html={renderMarkdown(item.description)} />
             </article>
@@ -155,29 +148,6 @@ const getServiceIconPaths = (icon?: string) =>
 
   .process-card h2 {
     margin-top: 0;
-  }
-
-  .service-icon {
-    align-items: center;
-    background: var(--text-primary);
-    border: 1px solid var(--text-primary);
-    border-radius: 0.65rem;
-    color: var(--bg);
-    display: inline-flex;
-    height: 2.75rem;
-    justify-content: center;
-    width: 2.75rem;
-  }
-
-  .service-icon svg {
-    display: block;
-    fill: none;
-    height: 1.45rem;
-    stroke: currentColor;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1.8;
-    width: 1.45rem;
   }
 
   .actions {
