@@ -26,7 +26,7 @@ services:
       icon: map-pin
     - title: SEO for Rehabs
       description: I've been working heavily in this space for most of my career. In 2023 I lost my brother to substance use. Over a decade of continuous work in this space combined with my personal proximity to the subject matter have given me a perspective and expertise that genuinely makes me one of the most qualified in the industry.
-      icon: search
+      icon: heart
     - title: White-label Linkbuilding
       description: Linkbuilding is often the missing piece agencies need to deliver a more complete service. Sometimes teams of great SEOs simply aren't equipped or don't have time to handle it themselves. I integrate into your existing process to help improve your offering by optimizing content and scaling outreach to help you land more links for your clients.
       icon: chart
