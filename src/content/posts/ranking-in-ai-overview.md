@@ -93,7 +93,9 @@ But I wanted to see how I could get things to move for a term that isn't mention
 
 How do I know this didn't happen simply because the links were giving the site more authority and Google already correlates the brand for these terms? Or that the links simply allowed it to be crawled more often. Or anything else? 
 
-The truth is I don't. Other than the fact that the site doesn't really appear in the same way for other similar terms (it's around page 8 -10 for a lot of things like "window replacement [city]" -again none of those words being on the page) and the timing of this starting to happen a week or two after the initial links were built. 
+The truth is I don't. Other than the fact that the site doesn't really appear in the same way for other similar terms (it's been bouncing around page 6 -8 for a lot of things like "window replacement [city]" -again none of those words being on the page. You can see in the updated spreadsheet screenshot below where some of the directory listings I created contain phrases in the listing descriptions that match terms that the site ranks (albeit much lower) for) and the timing of this starting to happen a week or two after the initial links were built. 
+
+![](</images/Screenshot 2026-06-09 at 3.46.58 PM.png>)
 
 Still, I think an honest linkbuilder will say "it could be a lot of things helping to drive this, but I know my work didn't stop it from happening" and that goes for just about anything we do. 
 
