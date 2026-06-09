@@ -3,7 +3,7 @@ title: Services — The B-Side
 description: Linkbuilding services for competitive brands, local SEO, rehabs, agencies, and teams that need relevance-first off-site SEO.
 hero:
   heading: Process
-  subtext: 
+  subtext: ' '
 featureSplits:
   - heading: Analysis
     subtext: A good linkbuilding strategy starts with understanding what actually moves rankings in your niche. I analyze competitors, backlink profiles, topic gaps and your site’s existing content to uncover areas that can be strengthened for better search visibility.
@@ -15,8 +15,8 @@ featureSplits:
     subtext: Reporting shouldn’t mean waiting weeks to understand what’s happening with your campaign. I share my work with you throughout the process, giving you real-time visibility into outreach, communication and acquired links so you always know what's in the pipeline.
 services:
   eyebrow: Services
-  heading: 
-  subtext: 
+  heading: ' '
+  subtext: ' '
   items:
     - title: Linkbuilding
       description: 15+ years of relevance-first linkbuilding focused on earning the links my clients deserve. I believe in treating linkbuilding the same as any other optimization task, not just a service tacked on at the end to try to game the algorithms.
