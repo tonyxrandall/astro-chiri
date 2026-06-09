@@ -1,0 +1,122 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { renderMarkdown } from '@/utils/markdown'
+
+type Page = CollectionEntry<'pages'>
+const { page } = Astro.props as { page: Page }
+const { hero, featureSplits = [], services, cta } = page.data
+---
+
+<div class="home-content prose">
+  {hero && (
+    <section class="hero-section">
+      <p class="eyebrow">{page.data.siteTagline}</p>
+      <h1>{hero.heading}</h1>
+      {hero.subtext && <p>{hero.subtext}</p>}
+      {(hero.primaryButtonText || hero.secondaryButtonText) && (
+        <div class="actions">
+          {hero.primaryButtonText && hero.primaryButtonLink && <a href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>}
+          {hero.secondaryButtonText && hero.secondaryButtonLink && <a href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>}
+        </div>
+      )}
+    </section>
+  )}
+
+  {featureSplits.length > 0 && (
+    <section class="section-list" aria-label="Feature sections">
+      {featureSplits.map((feature) => (
+        <article class="content-card">
+          {feature.eyebrow && <p class="eyebrow">{feature.eyebrow}</p>}
+          <h2>{feature.heading}</h2>
+          <p>{feature.subtext}</p>
+          {feature.image && <img src={feature.image} alt={feature.imageAlt ?? feature.heading} loading="lazy" />}
+        </article>
+      ))}
+    </section>
+  )}
+
+  {services && (
+    <section id="services" class="section-list">
+      {services.eyebrow && <p class="eyebrow">{services.eyebrow}</p>}
+      <h2>{services.heading}</h2>
+      {services.subtext.trim() && <p>{services.subtext}</p>}
+      <div class="service-grid">
+        {services.items.map((item) => (
+          <article class="content-card service-card">
+            <h3>{item.title}</h3>
+            <div set:html={renderMarkdown(item.description)} />
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  {cta && (
+    <section class="content-card cta-card">
+      <h2>{cta.heading}</h2>
+      <p>{cta.subtext}</p>
+      {(cta.primaryButtonText || cta.secondaryButtonText) && (
+        <div class="actions">
+          {cta.primaryButtonText && cta.primaryButtonLink && <a href={cta.primaryButtonLink}>{cta.primaryButtonText}</a>}
+          {cta.secondaryButtonText && cta.secondaryButtonLink && <a href={cta.secondaryButtonLink}>{cta.secondaryButtonText}</a>}
+        </div>
+      )}
+    </section>
+  )}
+</div>
+
+<style>
+  .home-content {
+    margin-bottom: 2rem;
+  }
+
+  .hero-section {
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    color: var(--text-secondary);
+    font-size: var(--font-size-s);
+    margin-bottom: 0.25rem;
+  }
+
+  .section-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin: 3rem 0;
+  }
+
+  .content-card {
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .service-card h3 {
+    margin-top: 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .actions a {
+    color: var(--text-primary);
+  }
+
+  img {
+    border-radius: 0.75rem;
+    display: block;
+    margin-top: 1rem;
+    max-width: 100%;
+  }
+</style>

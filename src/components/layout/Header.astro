@@ -1,28 +1,62 @@
 ---
+import { getEntry } from 'astro:content'
 import { themeConfig } from '@/config'
 import ThemeToggle from '@/components/ui/ThemeToggle.astro'
+
+const navigation = await getEntry('settings', 'navigation')
+const siteName = navigation?.data.siteName ?? themeConfig.site.title
+const navLinks = navigation?.data.navLinks ?? []
+const ctaText = navigation?.data.ctaText
+const ctaUrl = navigation?.data.ctaUrl
 ---
 
 <header>
   <nav>
-    <a href="/">{themeConfig.site.title}</a>
-    {themeConfig.general.themeToggle && <ThemeToggle />}
+    <a class="site-name" href="/">{siteName}</a>
+    <div class="nav-links">
+      {navLinks.map((link) => <a href={link.url}>{link.label}</a>)}
+      {ctaText && ctaUrl && <a href={ctaUrl}>{ctaText}</a>}
+      {themeConfig.general.themeToggle && <ThemeToggle />}
+    </div>
   </nav>
 </header>
 <style>
   header {
-    margin: 0;
+    margin: 0 0 2rem;
   }
+
   nav {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
   }
-  header a {
-    font-weight: var(--font-weight-bold);
+
+  a {
     color: var(--text-primary);
     text-decoration: none;
-    min-width: 3rem;
+  }
+
+  .site-name {
     display: inline-block;
+    font-weight: var(--font-weight-bold);
+    min-width: 3rem;
+  }
+
+  .nav-links {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    font-size: var(--font-size-s);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
   }
 </style>
