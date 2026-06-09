@@ -20,9 +20,9 @@ const { hero, featureSplits = [], services, cta } = page.data
 
   {
     featureSplits.length > 0 && (
-      <section class="section-list" aria-label="Linkbuilding process">
+      <section class="card-grid process-grid" aria-label="Linkbuilding process">
         {featureSplits.map((feature) => (
-          <article class="service-section">
+          <article class="service-card process-card">
             {feature.eyebrow && <p class="eyebrow">{feature.eyebrow}</p>}
             <h2>{feature.heading}</h2>
             <p>{feature.subtext}</p>
@@ -34,13 +34,13 @@ const { hero, featureSplits = [], services, cta } = page.data
 
   {
     services && (
-      <section class="section-list" aria-labelledby="services-heading">
+      <section class="services-section" aria-labelledby="services-heading">
         {services.eyebrow && <p class="eyebrow">{services.eyebrow}</p>}
-        <h2 id="services-heading">{services.heading}</h2>
+        {services.heading.trim() && <h2 id="services-heading">{services.heading}</h2>}
         {services.subtext.trim() && <p>{services.subtext}</p>}
-        <div class="section-list service-list">
+        <div class="card-grid service-list">
           {services.items.map((item) => (
-            <article class="service-section">
+            <article class="service-card">
               <h3>{item.title}</h3>
               <div set:html={renderMarkdown(item.description)} />
             </article>
@@ -52,7 +52,7 @@ const { hero, featureSplits = [], services, cta } = page.data
 
   {
     cta && (
-      <section class="service-section cta-section">
+      <section class="service-card cta-section">
         <h2>{cta.heading}</h2>
         <p>{cta.subtext}</p>
         {(cta.primaryButtonText || cta.secondaryButtonText) && (
@@ -76,7 +76,7 @@ const { hero, featureSplits = [], services, cta } = page.data
   }
 
   .services-hero {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .eyebrow {
@@ -85,23 +85,47 @@ const { hero, featureSplits = [], services, cta } = page.data
     margin-bottom: 0.25rem;
   }
 
-  .section-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  .card-grid {
+    display: grid;
+    gap: 1rem;
+    margin: 2rem 0 3rem;
+  }
+
+  .process-grid,
+  .service-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  }
+
+  .services-section {
     margin: 3rem 0;
   }
 
   .service-list {
-    margin: 2rem 0 0;
+    margin-top: 1.25rem;
   }
 
-  .service-section > :first-child {
+  .service-card {
+    background: color-mix(in srgb, var(--text-primary) 3%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem;
+  }
+
+  .service-card > :first-child {
     margin-top: 0;
   }
 
-  .service-section > :last-child {
+  .service-card > :last-child {
     margin-bottom: 0;
+  }
+
+  .service-card h2,
+  .service-card h3 {
+    margin-top: 0.8rem;
+  }
+
+  .process-card h2 {
+    margin-top: 0;
   }
 
   .actions {
