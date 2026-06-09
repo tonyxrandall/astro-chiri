@@ -8,61 +8,76 @@ const { hero, featureSplits = [], services, cta } = page.data
 ---
 
 <div class="home-content prose">
-  {hero && (
-    <section class="hero-section">
-      <p class="eyebrow">{page.data.siteTagline}</p>
-      <h1>{hero.heading}</h1>
-      {hero.subtext && <p>{hero.subtext}</p>}
-      {(hero.primaryButtonText || hero.secondaryButtonText) && (
-        <div class="actions">
-          {hero.primaryButtonText && hero.primaryButtonLink && <a href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>}
-          {hero.secondaryButtonText && hero.secondaryButtonLink && <a href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>}
-        </div>
-      )}
-    </section>
-  )}
+  {
+    hero && (
+      <section class="hero-section">
+        <h1>{hero.heading}</h1>
+        {hero.subtext && <p>{hero.subtext}</p>}
+        {(hero.primaryButtonText || hero.secondaryButtonText) && (
+          <div class="actions">
+            {hero.primaryButtonText && hero.primaryButtonLink && (
+              <a href={hero.primaryButtonLink}>{hero.primaryButtonText}</a>
+            )}
+            {hero.secondaryButtonText && hero.secondaryButtonLink && (
+              <a href={hero.secondaryButtonLink}>{hero.secondaryButtonText}</a>
+            )}
+          </div>
+        )}
+      </section>
+    )
+  }
 
-  {featureSplits.length > 0 && (
-    <section class="section-list" aria-label="Feature sections">
-      {featureSplits.map((feature) => (
-        <article class="content-card">
-          {feature.eyebrow && <p class="eyebrow">{feature.eyebrow}</p>}
-          <h2>{feature.heading}</h2>
-          <p>{feature.subtext}</p>
-          {feature.image && <img src={feature.image} alt={feature.imageAlt ?? feature.heading} loading="lazy" />}
-        </article>
-      ))}
-    </section>
-  )}
-
-  {services && (
-    <section id="services" class="section-list">
-      {services.eyebrow && <p class="eyebrow">{services.eyebrow}</p>}
-      <h2>{services.heading}</h2>
-      {services.subtext.trim() && <p>{services.subtext}</p>}
-      <div class="service-grid">
-        {services.items.map((item) => (
-          <article class="content-card service-card">
-            <h3>{item.title}</h3>
-            <div set:html={renderMarkdown(item.description)} />
+  {
+    featureSplits.length > 0 && (
+      <section class="section-list" aria-label="Feature sections">
+        {featureSplits.map((feature) => (
+          <article class="content-card">
+            {feature.eyebrow && <p class="eyebrow">{feature.eyebrow}</p>}
+            <h2>{feature.heading}</h2>
+            <p>{feature.subtext}</p>
+            {feature.image && <img src={feature.image} alt={feature.imageAlt ?? feature.heading} loading="lazy" />}
           </article>
         ))}
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 
-  {cta && (
-    <section class="content-card cta-card">
-      <h2>{cta.heading}</h2>
-      <p>{cta.subtext}</p>
-      {(cta.primaryButtonText || cta.secondaryButtonText) && (
-        <div class="actions">
-          {cta.primaryButtonText && cta.primaryButtonLink && <a href={cta.primaryButtonLink}>{cta.primaryButtonText}</a>}
-          {cta.secondaryButtonText && cta.secondaryButtonLink && <a href={cta.secondaryButtonLink}>{cta.secondaryButtonText}</a>}
+  {
+    services && (
+      <section id="services" class="section-list">
+        {services.eyebrow && <p class="eyebrow">{services.eyebrow}</p>}
+        <h2>{services.heading}</h2>
+        {services.subtext.trim() && <p>{services.subtext}</p>}
+        <div class="service-grid">
+          {services.items.map((item) => (
+            <article class="content-card service-card">
+              <h3>{item.title}</h3>
+              <div set:html={renderMarkdown(item.description)} />
+            </article>
+          ))}
         </div>
-      )}
-    </section>
-  )}
+      </section>
+    )
+  }
+
+  {
+    cta && (
+      <section class="content-card cta-card">
+        <h2>{cta.heading}</h2>
+        <p>{cta.subtext}</p>
+        {(cta.primaryButtonText || cta.secondaryButtonText) && (
+          <div class="actions">
+            {cta.primaryButtonText && cta.primaryButtonLink && (
+              <a href={cta.primaryButtonLink}>{cta.primaryButtonText}</a>
+            )}
+            {cta.secondaryButtonText && cta.secondaryButtonLink && (
+              <a href={cta.secondaryButtonLink}>{cta.secondaryButtonText}</a>
+            )}
+          </div>
+        )}
+      </section>
+    )
+  }
 </div>
 
 <style>
@@ -71,7 +86,15 @@ const { hero, featureSplits = [], services, cta } = page.data
   }
 
   .hero-section {
-    margin-bottom: 3rem;
+    margin: 3rem 0;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(2.25rem, 6vw, 3.65rem);
+    letter-spacing: -0.055em;
+    line-height: 1.02;
+    margin: 0;
+    max-width: 100%;
   }
 
   .eyebrow {
