@@ -39,6 +39,6 @@ services:
 cta:
   heading: Ready to improve your link profile?
   subtext: I build links that move rankings and help drive growth. Let's talk about what that looks like for your site.
-  primaryButtonText: Book a Strategy Call
+  primaryButtonText: Get in touch.
   primaryButtonLink: /about#contact
 ---
