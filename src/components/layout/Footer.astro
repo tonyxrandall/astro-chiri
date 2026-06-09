@@ -1,50 +1,50 @@
 ---
+import { getEntry } from 'astro:content'
 import { themeConfig } from '@/config'
-const today = new Date()
+
+const footer = await getEntry('settings', 'footer')
+const companyName = footer?.data.companyName ?? themeConfig.site.author
+const tagline = footer?.data.tagline
+const copyright = footer?.data.copyright
+const links = footer?.data.links ?? []
 ---
 
 <footer>
   <div class="footer-content">
-    <div class="copyright">
-      <span class="date">
-        &copy;
-        {today.getFullYear()}
-      </span>
-      {themeConfig.site.author}
+    <div>
+      <div class="copyright">{copyright ?? companyName}</div>
+      {tagline && <div class="tagline">{tagline}</div>}
     </div>
-    <div class="powered-by">
-      Powered by{' '}
-      <a href="https://astro.build">Astro</a> +{' '}
-      <a href="https://github.com/the3ash/astro-chiri">Chiri</a>
-    </div>
+    {links.length > 0 && (
+      <nav aria-label="Footer">
+        {links.map((link) => <a href={link.url}>{link.label}</a>)}
+      </nav>
+    )}
   </div>
 </footer>
 <style>
   footer {
+    color: var(--text-secondary);
     font-size: var(--font-size-s);
     font-weight: var(--font-weight-light);
     line-height: 1.75;
-    color: var(--text-secondary);
-    opacity: 0.75;
     margin-top: 4rem;
+    opacity: 0.75;
   }
 
   .footer-content {
+    align-items: flex-start;
     display: flex;
+    gap: 1.5rem;
     justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: nowrap;
     width: 100%;
   }
 
-  .copyright,
-  .powered-by {
-    white-space: nowrap;
-  }
-
-  .copyright .date {
-    opacity: 1;
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: flex-end;
   }
 
   footer a {
@@ -55,5 +55,15 @@ const today = new Date()
 
   footer a:hover {
     color: var(--text-primary);
+  }
+
+  @media (max-width: 600px) {
+    .footer-content {
+      flex-direction: column;
+    }
+
+    nav {
+      justify-content: flex-start;
+    }
   }
 </style>

@@ -156,6 +156,28 @@ content:
             label: Subtext
             type: string
 
+  - name: blog
+    label: Blog Page
+    path: src/content/pages/blog.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+      - name: description
+        label: SEO Description
+        type: text
+      - name: hero
+        label: Blog Hero
+        type: object
+        fields:
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+
   - name: navigation
     label: Navigation
     path: src/content/settings/navigation.md
@@ -220,6 +242,9 @@ content:
         label: Publish Date
         type: date
         required: true
+      - name: draft
+        label: Draft
+        type: boolean
       - name: description
         label: Description
         type: text

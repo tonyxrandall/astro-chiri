@@ -1,0 +1,51 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+import IndexLayout from '@/layouts/IndexLayout.astro'
+import PostList from '@/components/widgets/PostList.astro'
+import { themeConfig } from '@/config'
+import { byNewestPubDate, isPublishedPost, normalizeTags } from '@/utils/posts'
+
+const blogPage = await getEntry('pages', 'blog')
+const posts = (await getCollection('posts', isPublishedPost)).sort(byNewestPubDate)
+const tags = [...new Set(posts.flatMap((post) => normalizeTags(post.data.tags)))]
+const title = blogPage?.data.title ?? `Blog — ${themeConfig.site.title}`
+const description = blogPage?.data.description ?? themeConfig.site.description
+const hero = blogPage?.data.hero
+---
+
+<IndexLayout title={title} description={description}>
+  <section class="blog-index prose">
+    {hero && (
+      <div class="hero-section">
+        <h1>{hero.heading}</h1>
+        {hero.subtext && <p>{hero.subtext}</p>}
+      </div>
+    )}
+    {tags.length > 0 && (
+      <nav class="tag-list" aria-label="Tags">
+        {tags.map((tag) => <a href={`/tags/${tag}/`}>{tag}</a>)}
+      </nav>
+    )}
+  </section>
+  <main>
+    <PostList posts={posts} />
+  </main>
+</IndexLayout>
+
+<style>
+  .hero-section {
+    margin-bottom: 1rem;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .tag-list a {
+    color: var(--text-secondary);
+    font-size: var(--font-size-s);
+  }
+</style>

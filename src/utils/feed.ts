@@ -117,14 +117,14 @@ async function generateFeedInstance(context: APIContext) {
     }
   })
 
-  const posts = await getCollection('posts', ({ id }: CollectionEntry<'posts'>) => !id.startsWith('_'))
+  const posts = await getCollection('posts', ({ id, data }: CollectionEntry<'posts'>) => !id.startsWith('_') && !data.draft)
   const sortedPosts = posts.sort(
     (a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
   )
 
   for (const post of sortedPosts) {
     const postSlug = post.id.replace(/\.[^/.]+$/, '')
-    const postUrl = new URL(postSlug, siteUrl).toString()
+    const postUrl = new URL(`blog/${postSlug}/`, siteUrl).toString()
     const rawHtml = markdownParser.render(post.body || '')
     const processedHtml = await fixRelativeImagePaths(rawHtml, siteUrl, post.id)
     const cleanHtml = sanitizeHtml(processedHtml, {
