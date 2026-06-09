@@ -91,8 +91,18 @@ Honestly, I don't know if there is one. We know links work. We know anchor text 
 
 But I wanted to see how I could get things to move for a term that isn't mentioned in the content anywhere. 
 
-How do we know this didn't happen simply because the links were giving the site more authority and Google already correlates the brand for these terms? Or that the links simply allowed it to be crawled more often. Or anything else? 
+How do I know this didn't happen simply because the links were giving the site more authority and Google already correlates the brand for these terms? Or that the links simply allowed it to be crawled more often. Or anything else? 
 
-The truth is we don't. Other than the fact that the site doesn't really appear in the same way for other similar terms (it's around page 8 -10 for a lot of things like "window replacement [city]" -again none of those words being on the page) and the timing of this starting to happen a week or two after the initial links were built. 
+The truth is I don't. Other than the fact that the site doesn't really appear in the same way for other similar terms (it's around page 8 -10 for a lot of things like "window replacement [city]" -again none of those words being on the page) and the timing of this starting to happen a week or two after the initial links were built. 
 
-Still, I think an honest linkbuilder will say "it could be a lot of things driving this, but I know my work didn't stop it from happening"
+Still, I think an honest linkbuilder will say "it could be a lot of things helping to drive this, but I know my work didn't stop it from happening" and that goes for just about anything we do. 
+
+There are so many different factors at play especially regarding off-site SEO that it often doesn't feel right to me to claim with 100% certainty that *this* did *that*, even if I know that if I want *that* to happen I should do *this*. 
+
+And I know the main critique of this already: that's an insanely uncompetitive term, try doing the same in Los Angeles. 
+
+Yeah, no shit, in order to examine something in isolation you need to be able to isolate it. 
+
+Is this going to work in every vertical for every competitive term? Probably not. But then again, if you're a good SEO you should be able to find some instances where you'll be able to do something similar even in much more competitive arenas. 
+
+And to me the point isn't even 
