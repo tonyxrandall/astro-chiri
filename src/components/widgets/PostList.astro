@@ -4,32 +4,56 @@ import type { PostListProps } from '@/types'
 import { themeConfig } from '@/config'
 
 const { posts } = Astro.props as PostListProps
+
+const getCoverImage = (post: PostListProps['posts'][number]) => {
+  const { image, title } = post.data
+
+  if (!image) return undefined
+  if (typeof image === 'string') return { url: image, alt: title }
+
+  return {
+    url: image.url,
+    alt: image.alt ?? title
+  }
+}
 ---
 
 <ul>
   {
-    posts.map((post) => (
-      <li>
-        <a href={`/blog/${post.id}/`}>
-          <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
-            {!themeConfig.date.dateOnRight && (
-              <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} context="list" />
-              </p>
+    posts.map((post) => {
+      const postUrl = `/blog/${post.id}/`
+      const coverImage = getCoverImage(post)
+
+      return (
+        <li>
+          <article class="post-card">
+            <a class="post-title-link" href={postUrl}>
+              <div class={`post-item ${!themeConfig.date.dateOnRight ? 'date-left' : ''}`}>
+                {!themeConfig.date.dateOnRight && (
+                  <p class="date font-features">
+                    <FormattedDate date={post.data.pubDate} context="list" />
+                  </p>
+                )}
+                <p class="title">{post.data.title}</p>
+                {themeConfig.date.dateOnRight && (
+                  <div class={themeConfig.general.postListDottedDivider ? 'dotted-divider' : 'divider'} />
+                )}
+                {themeConfig.date.dateOnRight && (
+                  <p class="date font-features">
+                    <FormattedDate date={post.data.pubDate} context="list" />
+                  </p>
+                )}
+              </div>
+            </a>
+            {coverImage && (
+              <a class="post-cover-link" href={postUrl} aria-label={`Read ${post.data.title}`}>
+                <img class="post-cover" src={coverImage.url} alt={coverImage.alt} loading="lazy" />
+              </a>
             )}
-            <p class="title">{post.data.title}</p>
-            {themeConfig.date.dateOnRight && (
-              <div class={themeConfig.general.postListDottedDivider ? 'dotted-divider' : 'divider'} />
-            )}
-            {themeConfig.date.dateOnRight && (
-              <p class="date font-features">
-                <FormattedDate date={post.data.pubDate} context="list" />
-              </p>
-            )}
-          </div>
-        </a>
-      </li>
-    ))
+          </article>
+        </li>
+      )
+    })
   }
 </ul>
 <div class="placeholder"></div>
@@ -41,7 +65,7 @@ const { posts } = Astro.props as PostListProps
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 2.5rem;
   }
 
   a {
@@ -56,25 +80,35 @@ const { posts } = Astro.props as PostListProps
       opacity: 0.4;
     }
 
-    ul:hover a:hover {
+    ul:hover a:hover,
+    ul:hover .post-card:has(a:hover) a {
       opacity: 1;
     }
 
-    ul:hover a:hover .divider {
+    ul:hover a:hover .divider,
+    ul:hover .post-card:has(a:hover) .divider {
       background-color: var(--text-tertiary);
       opacity: 0.75;
     }
-    ul:hover a:hover .dotted-divider {
+    ul:hover a:hover .dotted-divider,
+    ul:hover .post-card:has(a:hover) .dotted-divider {
       color: var(--text-secondary);
     }
-    ul:hover a:hover .date {
+    ul:hover a:hover .date,
+    ul:hover .post-card:has(a:hover) .date {
       color: var(--text-secondary);
       opacity: 1;
     }
   }
 
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .post-item {
-    height: 2.75rem;
+    min-height: 2.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -135,6 +169,17 @@ const { posts } = Astro.props as PostListProps
   .dotted-divider::after {
     content: '·····························································································································································';
     pointer-events: none;
+  }
+
+  .post-cover-link {
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .post-cover {
+    border-radius: 0.75rem;
+    display: block;
+    width: 100%;
   }
 
   .placeholder {
