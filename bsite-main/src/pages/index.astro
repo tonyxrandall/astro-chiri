@@ -1,0 +1,211 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { micromark } from "micromark";
+
+const pagesEntries = await getCollection("pages");
+const homePage = pagesEntries.find((e) => e.id === "index");
+const data = homePage?.data;
+
+const defaultFeatureSplits = [
+  {
+    eyebrow: "Built for Search Visibility",
+    heading: "Links that move rankings, traffic, and pipeline",
+    subtext:
+      "We focus on high-impact links from relevant publications and partners so your site earns authority in the topics that matter most.",
+  },
+  {
+    eyebrow: "Campaign Delivery",
+    heading: "Transparent execution and reporting",
+    subtext:
+      "Know exactly what we are building each month: target pages, outreach status, earned placements, and performance impact.",
+  },
+  {
+    eyebrow: "Authority",
+    heading: "Build domain trust in competitive SERPs",
+    subtext:
+      "Strong links help search engines trust your brand, improving how often and how highly your pages appear for high-intent queries.",
+  },
+  {
+    eyebrow: "Partnerships",
+    heading: "Editorial placements that fit your brand",
+    subtext:
+      "We prioritize placements on sites your audience already reads, with natural mentions that support long-term SEO performance.",
+  },
+];
+
+const defaultServiceItems = [
+  {
+    title: "Linkbuilding",
+    description:
+      "Strategic outreach and placement campaigns that earn high-quality backlinks from relevant, authoritative publications in your niche.",
+    icon: "link",
+  },
+  {
+    title: "Digital PR",
+    description:
+      "Data-driven campaigns and creative angles that earn press coverage and editorial links from top-tier publications.",
+    icon: "megaphone",
+  },
+  {
+    title: "SEO for Rehabs",
+    description:
+      "Specialized link acquisition strategies for addiction treatment and behavioral health brands in highly competitive SERPs.",
+    icon: "search",
+  },
+  {
+    title: "Local SEO",
+    description:
+      "Citation building, local link acquisition, and Google Business Profile optimization to dominate local search results.",
+    icon: "map-pin",
+  },
+  {
+    title: "Technical & Onsite SEO",
+    description:
+      "Site audits, crawlability fixes, and on-page optimization to ensure your content is ready to rank once links arrive.",
+    icon: "wrench",
+  },
+  {
+    title: "Technical & Onsite SEO",
+    description:
+      "Site audits, crawlability fixes, and on-page optimization to ensure your content is ready to rank once links arrive.",
+    icon: "wrench",
+  },
+];
+
+const hero = data?.hero;
+const featureSplits = data?.featureSplits ?? [];
+const services = data?.services;
+const serviceItems = services?.items ?? [];
+const cta = data?.cta;
+
+const renderServiceDescription = (description: string) =>
+  micromark(description, {
+    allowDangerousHtml: false,
+  });
+
+// Icon map for services
+const iconSvgs: Record<string, string> = {
+  link: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>`,
+  megaphone: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46" /></svg>`,
+  search: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0015.803 15.803z" /></svg>`,
+  heart: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.435 6.582a5.373 5.373 0 00-7.601 0L12 8.417l-1.834-1.835a5.373 5.373 0 00-7.601 7.602l1.835 1.834L12 23.25l7.767-7.232 1.668-1.834a5.373 5.373 0 000-7.602z" /></svg>`,
+  "map-pin": `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>`,
+  wrench: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z" /></svg>`,
+  chart: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>`,
+};
+---
+
+<BaseLayout
+  title={data?.siteTitle ?? "The B-Side — Linkbuilding Consultancy"}
+  description={data?.siteTagline ?? "Strategic link acquisition and digital authority growth for competitive brands."}
+>
+  <!-- Hero -->
+  {hero && (
+    <section class="py-24 md:py-32">
+      <div class="max-w-4xl">
+        <h1 class="text-4xl md:text-5xl font-medium font-display text-base-900 text-balance leading-tight">
+          {hero.heading}
+        </h1>
+        {hero.subtext && (
+          <p class="mt-6 text-base text-base-500 text-balance max-w-3xl leading-relaxed">
+            {hero.subtext}
+          </p>
+        )}
+        <div class="flex flex-wrap gap-3 mt-8">
+          {hero.primaryButtonText && (
+            <a
+              href={hero.primaryButtonLink ?? "/#services"}
+              class="py-2 px-5 text-sm rounded-full bg-base-900 text-white hover:bg-base-700 transition-colors duration-150 font-medium"
+            >
+              {hero.primaryButtonText}
+            </a>
+          )}
+          {hero.secondaryButtonText && (
+            <a
+              href={hero.secondaryButtonLink ?? "/about"}
+              class="py-2 px-5 text-sm rounded-full border border-base-200 text-base-900 hover:border-base-400 transition-colors duration-150 font-medium"
+            >
+              {hero.secondaryButtonText}
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Feature Boxes -->
+  {featureSplits.length > 0 && (
+    <section class="border-t border-base-100">
+      <div class="grid grid-cols-1 gap-x-12 md:grid-cols-2">
+        {featureSplits.map((feature) => (
+          <article class="border-b border-base-100 py-12 md:py-16">
+            {feature.eyebrow && (
+              <p class="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-3">{feature.eyebrow}</p>
+            )}
+            <h2 class="text-2xl md:text-3xl font-medium font-display text-base-900 text-balance leading-snug">
+              {feature.heading}
+            </h2>
+            <p class="mt-4 text-sm text-base-500 leading-relaxed">
+              {feature.subtext}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Services -->
+  {services && (
+    <section id="services" class="py-20 md:py-28 scroll-mt-16">
+      <div class="text-center mb-14">
+        {services.eyebrow && (
+          <p class="text-xs font-semibold text-blue-500 uppercase tracking-widest mb-3">{services.eyebrow}</p>
+        )}
+        <h2 class="text-3xl md:text-4xl font-medium font-display text-base-900 text-balance">
+          {services.heading}
+        </h2>
+        <p class="mt-4 text-sm text-base-500 max-w-2xl mx-auto">{services.subtext}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {serviceItems.map((service) => (
+          <div class="p-6 rounded-xl border border-base-100 hover:border-base-200 bg-white hover:bg-base-50 transition-all duration-150">
+            <div class="w-9 h-9 rounded-lg bg-base-900 flex items-center justify-center text-white mb-4">
+              <Fragment set:html={iconSvgs[service.icon ?? "link"] ?? iconSvgs["link"]} />
+            </div>
+            <h3 class="text-sm font-semibold text-base-900 mb-2">{service.title}</h3>
+            <div class="service-description text-sm text-base-500 leading-relaxed" set:html={renderServiceDescription(service.description)} />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  {cta && (
+    <section class="bg-base-50 rounded-xl p-8 lg:p-16 mb-16 text-center">
+      <h2 class="text-2xl md:text-3xl font-medium font-display text-base-900 text-balance max-w-xl mx-auto">
+        {cta.heading}
+      </h2>
+      <p class="mt-4 text-sm text-base-500 max-w-md mx-auto leading-relaxed">{cta.subtext}</p>
+      <div class="flex flex-wrap gap-3 justify-center mt-8">
+        {cta.primaryButtonText && (
+          <a
+            href={cta.primaryButtonLink ?? "/#services"}
+            class="py-2 px-5 text-sm rounded-full bg-base-900 text-white hover:bg-base-700 transition-colors duration-150 font-medium"
+          >
+            {cta.primaryButtonText}
+          </a>
+        )}
+        {cta.secondaryButtonText && (
+          <a
+            href={cta.secondaryButtonLink ?? "/about"}
+            class="py-2 px-5 text-sm rounded-full border border-base-200 text-base-900 hover:border-base-400 transition-colors duration-150 font-medium"
+          >
+            {cta.secondaryButtonText}
+          </a>
+        )}
+      </div>
+    </section>
+  )}
+</BaseLayout>

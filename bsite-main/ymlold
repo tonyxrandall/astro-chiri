@@ -1,0 +1,250 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: home
+    label: Home Page
+    path: src/content/pages/index.md
+    type: file
+    fields:
+      - name: siteTitle
+        label: Site Title
+        type: string
+      - name: siteTagline
+        label: Site Tagline
+        type: string
+      - name: hero
+        label: Hero Section
+        type: object
+        fields:
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+          - name: primaryButtonText
+            label: Primary Button Text
+            type: string
+          - name: primaryButtonLink
+            label: Primary Button Link
+            type: string
+          - name: secondaryButtonText
+            label: Secondary Button Text
+            type: string
+          - name: secondaryButtonLink
+            label: Secondary Button Link
+            type: string
+      - name: featureSplits
+        label: Feature Sections
+        type: list
+        fields:
+          - name: eyebrow
+            label: Eyebrow Text
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+          - name: image
+            label: Feature Image
+            type: image
+          - name: imageAlt
+            label: Feature Image Alt Text
+            type: string
+          - name: reverse
+            label: Reverse Layout
+            type: boolean
+      - name: services
+        label: Services Section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+          - name: items
+            label: Service Items
+            type: list
+            fields:
+              - name: title
+                label: Service Title
+                type: string
+              - name: description
+                label: Description
+                type: string
+              - name: icon
+                label: Icon
+                type: select
+                options:
+                  values:
+                    - link
+                    - megaphone
+                    - search
+                    - map-pin
+                    - wrench
+                    - chart
+      - name: cta
+        label: CTA Section
+        type: object
+        fields:
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+          - name: primaryButtonText
+            label: Primary Button Text
+            type: string
+          - name: primaryButtonLink
+            label: Primary Button Link
+            type: string
+          - name: secondaryButtonText
+            label: Secondary Button Text
+            type: string
+          - name: secondaryButtonLink
+            label: Secondary Button Link
+            type: string
+
+  - name: about
+    label: About Page
+    path: src/content/pages/about.md
+    type: file
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+      - name: description
+        label: SEO Description
+        type: text
+      - name: hero
+        label: About Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: heading
+            label: Heading
+            type: string
+          - name: body
+            label: Body Content (Markdown)
+            type: rich-text
+          - name: image
+            label: Profile / Feature Image
+            type: image
+          - name: imageAlt
+            label: Image Alt Text
+            type: string
+      - name: contact
+        label: Contact Section
+        type: object
+        fields:
+          - name: heading
+            label: Heading
+            type: string
+          - name: subtext
+            label: Subtext
+            type: string
+
+  - name: navigation
+    label: Navigation
+    path: src/content/settings/navigation.md
+    type: file
+    fields:
+      - name: siteName
+        label: Site Name
+        type: string
+      - name: navLinks
+        label: Nav Links
+        type: list
+        fields:
+          - name: label
+            label: Link Label
+            type: string
+          - name: url
+            label: URL
+            type: string
+      - name: ctaText
+        label: CTA Button Text
+        type: string
+      - name: ctaUrl
+        label: CTA Button URL
+        type: string
+
+  - name: footer
+    label: Footer
+    path: src/content/settings/footer.md
+    type: file
+    fields:
+      - name: companyName
+        label: Company Name
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: copyright
+        label: Copyright Text
+        type: string
+      - name: links
+        label: Footer Links
+        type: list
+        fields:
+          - name: label
+            label: Link Label
+            type: string
+          - name: url
+            label: URL
+            type: string
+
+  - name: posts
+    label: Blog Posts
+    path: src/content/posts
+    type: collection
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: pubDate
+        label: Publish Date
+        type: date
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+      - name: author
+        label: Author
+        type: string
+        required: true
+      - name: image
+        label: Cover Image
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+          - name: alt
+            label: Alt Text
+            type: string
+      - name: tags
+        label: Tags
+        type: list
+        fields:
+          - name: tag
+            label: Tag
+            type: string
+      - name: body
+        label: Post Content
+        type: rich-text

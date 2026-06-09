@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+
+const settingsEntries = await getCollection("settings");
+const footerEntry = settingsEntries.find((e) => e.id === "footer");
+const footer = footerEntry?.data;
+
+const companyName = footer?.companyName ?? "The B-Side";
+const tagline = footer?.tagline ?? "Strategic linkbuilding for competitive brands.";
+const copyright = footer?.copyright ?? `© ${new Date().getFullYear()} The B-Side. All rights reserved.`;
+const links = footer?.links ?? [];
+---
+
+<footer class="border-t border-base-100 mt-24">
+  <div class="py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+    <div>
+      <a href="/" class="text-sm font-semibold text-base-900">{companyName}</a>
+      <p class="text-xs text-base-500 mt-1">{tagline}</p>
+    </div>
+    <nav class="flex gap-6 flex-wrap">
+      {links.map((link) => (
+        <a href={link.url} class="text-xs text-base-500 hover:text-base-900 transition-colors">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <p class="text-xs text-base-400" x-data="{ year: new Date().getFullYear() }">
+      {copyright}
+    </p>
+  </div>
+</footer>
