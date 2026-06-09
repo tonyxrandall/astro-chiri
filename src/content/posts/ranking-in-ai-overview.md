@@ -105,6 +105,6 @@ And I know the main critique of this already: that's an insanely uncompetitive t
 
 Yeah, no shit, in order to examine something in isolation you need to be able to isolate it. 
 
-Is this going to work in every vertical for every competitive term? Probably not. But then again, if you're a good SEO you should be able to find some instances where you'll be able to do something similar even in much more competitive arenas. 
+Is this going to work in every vertical for every competitive term? Probably not. But then again, if you're a good SEO you should be able to find some instances where you'll be able to do something similar even in much more competitive arenas. Although, yeah, if you have a real brand and can build enough relevant links you probably can succeed at something like this.
 
-And to me the point isn't that we should make a strategy out of doing things like this, or that it's a good use of time (because it probably isn't) but instead I think a more important takeaway is that even in [current-year], with all of our constant algorithm updates and AI and everything else that seems to never stop changing, it's still in no small part... backlinks and keywords. The same as it ever was. 
+But to me the point isn't that we should make a strategy out of doing things like this, or that it's a good use of time (because it probably isn't in most cases) but instead I think a more important takeaway is that even in [current-year], with all of our constant algorithm updates and AI and everything else that seems to never stop changing, it's still in no small part... backlinks and keywords. The same as it ever was. 
