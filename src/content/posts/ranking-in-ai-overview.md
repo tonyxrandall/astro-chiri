@@ -46,7 +46,7 @@ I put together a doc of the links I built for this project and sorted them rough
 
 Funny enough I didn't check to see which were nofollow until after I had finished sorting them based on which I felt had the most value, so it was amusing to me to see all of the nofollow links towards the top. Interestingly, two of the lowest DR ones are are ones that I personally feel are among the most valuable. These two in particular are: 1) a local community website that lists businesses and has an active facebook group with over 10,000 members, 2) an Idaho county newspaper's business directory. 
 
-Following these, there are a couple high authority, well trafficked business directories, one of which I could control the anchor text on. Following those, a couple autoglass specific business directories and then some other various general business directories, many of which I was able to get exact match anchor text from. 
+Following these, there are a couple high authority, well trafficked business directories, one of which I could control the anchor text on. Then a couple autoglass specific business directories and then some other various general business directories, many of which I was able to get exact match anchor text from. 
 
 When we start to hone in on the "best" links in this list, there's one link that really seems to stand out from all of the others. They're all good links in my opinion, or I wouldn't have built them, but this one in particular hits a couple good marks. 
 
@@ -59,7 +59,7 @@ When we start to hone in on the "best" links in this list, there's one link that
 
 None of the other links check all of these boxes, although two other links hit points 1 and 3. I'm resisting the urge to turn this into a rant about how these metrics don't really matter that much but, still, as SEOs we like to rank things so I guess there has to be one "best" link.
 
-Interestingly this is also the link that gets referenced when I ask chatgpt about rock chip repair in [city].
+Is that link responsible for all of the performance boost we're getting from this effort? I don't know, but interestingly this is also the link that gets referenced when I ask chatgpt about rock chip repair in [city].
 
 ![](/images/screenshot-2026-06-06-at-44901-pm.png)
 
@@ -79,7 +79,7 @@ At the time of this writing it's sitting at 8.
 
 ![](/images/screenshot-2026-06-06-at-50606-pm.png)
 
-However, on Bing the website is the only page associated with this business that ranks for this term, which is actually one of the more interesting takeaways for me. That means it's appearing on bing for this term exclusively because of these backlinks/anchor texts.   
+However, on Bing the website is the only page associated with this business that ranks for this term, which is actually one of the more interesting takeaways for me. That means it's appearing on bing for this term exclusively because of these backlinks/anchor texts.  In my opinion. 
 
 ![](/images/screenshot-2026-06-06-at-50441-pm.png)
 
