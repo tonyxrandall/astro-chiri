@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content'
+import IndexLayout from '@/layouts/IndexLayout.astro'
+import PostList from '@/components/widgets/PostList.astro'
+import { themeConfig } from '@/config'
+import { byNewestPubDate, isPublishedPost, normalizeTags } from '@/utils/posts'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', isPublishedPost)
+  const tags = [...new Set(posts.flatMap((post) => normalizeTags(post.data.tags)))]
+
+  return tags.map((tag) => ({
+    params: { tag },
+    props: { tag, posts: posts.filter((post) => normalizeTags(post.data.tags).includes(tag)).sort(byNewestPubDate) }
+  }))
+}
+
+const { tag, posts } = Astro.props
+---
+
+<IndexLayout title={`${tag} — ${themeConfig.site.title}`} description={themeConfig.site.description}>
+  <main class="prose">
+    <h1>{tag}</h1>
+    <PostList posts={posts} />
+  </main>
+</IndexLayout>

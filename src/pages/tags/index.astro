@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content'
+import IndexLayout from '@/layouts/IndexLayout.astro'
+import { themeConfig } from '@/config'
+import { isPublishedPost, normalizeTags } from '@/utils/posts'
+
+const posts = await getCollection('posts', isPublishedPost)
+const tags = [...new Set(posts.flatMap((post) => normalizeTags(post.data.tags)))].sort((a, b) => a.localeCompare(b))
+---
+
+<IndexLayout title={`Tags — ${themeConfig.site.title}`} description={themeConfig.site.description}>
+  <main class="prose">
+    <h1>Tags</h1>
+    <ul>
+      {tags.map((tag) => <li><a href={`/tags/${tag}/`}>{tag}</a></li>)}
+    </ul>
+  </main>
+</IndexLayout>

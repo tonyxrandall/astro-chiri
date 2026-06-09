@@ -1,15 +1,19 @@
 ---
+import { getEntry } from 'astro:content'
 import IndexLayout from '@/layouts/IndexLayout.astro'
-import About from '@/components/widgets/About.astro'
+import HomeContent from '@/components/widgets/HomeContent.astro'
 import PostList from '@/components/widgets/PostList.astro'
 import { themeConfig } from '@/config'
 import { getSortedFilteredPosts } from '@/utils/draft'
 
+const homePage = await getEntry('pages', 'index')
 const posts = await getSortedFilteredPosts()
+const title = homePage?.data.siteTitle ?? themeConfig.site.title
+const description = homePage?.data.siteTagline ?? themeConfig.site.description
 ---
 
-<IndexLayout title={themeConfig.site.title} description={themeConfig.site.description}>
-  <About />
+<IndexLayout title={title} description={description}>
+  {homePage && <HomeContent page={homePage} />}
   <main>
     <PostList posts={posts} />
   </main>

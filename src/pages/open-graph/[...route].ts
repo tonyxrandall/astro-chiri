@@ -4,7 +4,10 @@ import { themeConfig } from '../../config'
 
 export const prerender = true
 
-const collectionEntries = await getCollection('posts')
+const collectionEntries = await getCollection(
+  'posts',
+  ({ id, data }: CollectionEntry<'posts'>) => !id.startsWith('_') && !data.draft
+)
 
 // Map the array of content collection entries to create an object.
 // Converts [{ id: 'post.md', data: { title: 'Example', pubDate: Date } }]
