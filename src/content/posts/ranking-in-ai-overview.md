@@ -8,9 +8,9 @@ image:
   url: /images/blog/screenshot-2026-06-06-at-3a270l072u044r091slightnessinonec074pd0d1322c30d2c0c6c3-1.png
 ---
 `Notes: before I get into this I just want to say I've anonymized the hell out of the following screenshots in order to 1) keep this and future tests clean by not revealing too much about the exact site and 2) this worked so well I don't want to just give away the backlink profile I built for free. I realize this makes the images more ugly and maybe less believable but SEOs are constantly believing much more farfetched claims than "directory links good. anchor text great." based on way less evidence. So if you have a problem with me striking out parts of the screenshots, I think you'll live. It's not like any of these things would have been hard to fake anyways.`  
-  
+
 Now...  
-  
+
 I previously wrote about how I built two identical websites for a real business, blocked one site from Google and one from LLMs, and how quickly I was able to get LLMs to surface and recommend the non-Google-indexed site by building a handful of links and local citations to it. 
 
 Another test I wanted to run with one of these sites was to see how quickly I could get the Google-indexed version of the site to rank for a keyword that isn't mentioned on the website anywhere exclusively using backlinks and exact match anchor text. 
@@ -83,3 +83,16 @@ However, on Bing the website is the only page associated with this business that
 
 ![](/images/screenshot-2026-06-06-at-50441-pm.png)
 
+## Conclusions
+
+So what's the lesson here? 
+
+Honestly, I don't know if there is one. We know links work. We know anchor text is important. 
+
+But I wanted to see how I could get things to move for a term that isn't mentioned in the content anywhere. 
+
+How do we know this didn't happen simply because the links were giving the site more authority and Google already correlates the brand for these terms? Or that the links simply allowed it to be crawled more often. Or anything else? 
+
+The truth is we don't. Other than the fact that the site doesn't really appear in the same way for other similar terms (it's around page 8 -10 for a lot of things like "window replacement [city]" -again none of those words being on the page) and the timing of this starting to happen a week or two after the initial links were built. 
+
+Still, I think an honest linkbuilder will say "it could be a lot of things driving this, but I know my work didn't stop it from happening"
