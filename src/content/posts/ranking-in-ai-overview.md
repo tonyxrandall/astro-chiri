@@ -73,9 +73,9 @@ However, the most surprising part of this was seeing it appear in the AIO, which
 
 ![](/images/screenshot-2026-06-06-at-45832-pm.png)
 
- Worth noting that with Google, the company's Facebook page usually ranks somewhere between 1 and 3 for "rock chip repair [city]" and the website currently appears somewhere below the Facebook page the majority of the time for the organic results.
+ Worth noting that with Google, the company's Facebook page usually ranks somewhere between 1 and 3 for "rock chip repair [city]" and the website currently appears somewhere below the Facebook page the majority of the time for the organic results. The facebook page ranks for a lot of window repair terms that the website doesn't appear for. Probably because the website doesn't mention these anywhere and the facebook page does.
 
-At the time of this writing it's sitting at 8. 
+At the time of this writing the site is sitting at 8 in the organic results in addition to the AIO. 
 
 ![](/images/screenshot-2026-06-06-at-50606-pm.png)
 
