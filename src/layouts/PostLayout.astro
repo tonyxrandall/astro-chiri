@@ -19,7 +19,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 
 import { themeConfig } from '@/config'
 
-const { title, pubDate, readingTime, toc = [], contentFeatures = {} } = Astro.props as PostLayoutProps
+const { title, pubDate, image, readingTime, toc = [], contentFeatures = {} } = Astro.props as PostLayoutProps
+const headerImage = typeof image === 'string' ? { url: image, alt: title } : image
 
 const postSlug = Astro.url.pathname.split('/').filter(Boolean).pop() || ''
 const ogImage = `/open-graph/${postSlug}.png`
@@ -57,6 +58,11 @@ const shouldRenderLinkCard = themeConfig.post.linkCard && contentFeatures.hasLin
             }
           </div>
         </div>
+        {
+          headerImage?.url && (
+            <img class="post-header-image" src={headerImage.url} alt={headerImage.alt ?? title} loading="eager" />
+          )
+        }
         <article class="content">
           <slot />
         </article>
@@ -83,5 +89,12 @@ const shouldRenderLinkCard = themeConfig.post.linkCard && contentFeatures.hasLin
 
   .post-container main {
     flex: 1;
+  }
+
+  .post-header-image {
+    border-radius: 0.75rem;
+    display: block;
+    margin: 1.5rem 0 2rem;
+    width: 100%;
   }
 </style>

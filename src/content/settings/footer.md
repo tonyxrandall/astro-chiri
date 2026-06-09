@@ -4,7 +4,7 @@ tagline: Strategic linkbuilding for competitive brands.
 copyright: © 2025 The B-Side. All rights reserved.
 links:
   - label: Services
-    url: /#services
+    url: /services
   - label: About
     url: /about
   - label: Blog
